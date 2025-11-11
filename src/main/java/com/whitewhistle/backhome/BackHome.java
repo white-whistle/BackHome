@@ -1,7 +1,10 @@
 package com.whitewhistle.backhome;
 
+import com.whitewhistle.backhome.command.ModCommands;
 import com.whitewhistle.backhome.items.ModItemGroups;
 import com.whitewhistle.backhome.items.ModItems;
+import com.whitewhistle.backhome.network.ServerPacketReceiver;
+import com.whitewhistle.backhome.network.payload.ModPayloads;
 import com.whitewhistle.backhome.world.ModDimensions;
 import net.fabricmc.api.ModInitializer;
 
@@ -20,5 +23,9 @@ public class BackHome implements ModInitializer {
         ModItems.init();
         ModItemGroups.init();
         ModDimensions.init();
+
+        ModCommands.init();
+        ModPayloads.init();
+        ServerPacketReceiver.init();
 	}
 }

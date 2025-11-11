@@ -60,14 +60,7 @@ public class HomeChunkGenerator extends ChunkGenerator {
         for (int localX = 0; localX < 16; localX++) {
             for (int localZ = 0; localZ < 16; localZ++) {
                 // Convert to world coords
-                int worldX = chunk.getPos().getStartX() + localX;
-                int worldZ = chunk.getPos().getStartZ() + localZ;
-
-                // Sine wave height
-                // double height = baseHeight + amplitude * Math.sin(worldX / frequency) * Math.cos(worldZ / frequency);
-                // int intHeight = (int) Math.floor(height);
-
-                var isWall = (worldX % frequency == 0) || (worldZ % frequency == 0);
+                var isWall = isIsWall(chunk, localX, localZ);
                 int intHeight = isWall ? 60 : 10;
 
                 // Fill blocks up to height
@@ -95,6 +88,23 @@ public class HomeChunkGenerator extends ChunkGenerator {
         }
 
         return CompletableFuture.completedFuture(chunk);
+    }
+
+    private static boolean isIsWall(Chunk chunk, int localX, int localZ) {
+        int worldX = chunk.getPos().getStartX() + localX;
+        int worldZ = chunk.getPos().getStartZ() + localZ;
+
+        // Sine wave height
+        // double height = baseHeight + amplitude * Math.sin(worldX / frequency) * Math.cos(worldZ / frequency);
+        // int intHeight = (int) Math.floor(height);
+
+        var modX = Math.abs(worldX % HomePlotSystem.PLOT_SIZE);
+        var modZ = Math.abs(worldZ % HomePlotSystem.PLOT_SIZE);
+
+        return modX <= HomePlotSystem.BARRIER_THICKNESS
+        || modX >= HomePlotSystem.PLOT_SIZE - HomePlotSystem.BARRIER_THICKNESS
+        || modZ <= HomePlotSystem.BARRIER_THICKNESS
+        || modZ >= HomePlotSystem.PLOT_SIZE - HomePlotSystem.BARRIER_THICKNESS;
     }
 
     @Override

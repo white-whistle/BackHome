@@ -12,7 +12,6 @@ import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.HeightLimitView;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.biome.source.FixedBiomeSource;
 import net.minecraft.world.chunk.Chunk;
@@ -31,7 +30,7 @@ public class HomeChunkGenerator extends ChunkGenerator {
                     .apply(instance, instance.stable(HomeChunkGenerator::new)));
 
     public HomeChunkGenerator(RegistryEntryLookup<Biome> biomeRegistry) {
-        super(new FixedBiomeSource(biomeRegistry.getOrThrow(BiomeKeys.PLAINS)));
+        super(new FixedBiomeSource(biomeRegistry.getOrThrow(ModBiomeKeys.HOUSE)));
     }
 
     @Override
@@ -46,40 +45,32 @@ public class HomeChunkGenerator extends ChunkGenerator {
 
     @Override
     public CompletableFuture<Chunk> populateNoise(Blender blender, NoiseConfig noiseConfig, StructureAccessor structureAccessor, Chunk chunk) {
-        // Parameters for sine wave
-        double amplitude = 20;  // how tall
-        double frequency = 32;  // how wide the waves are
-        int baseHeight = 64;    // average ground height
-
-        BlockState solid = Blocks.STONE.getDefaultState();
-        BlockState top = Blocks.GRASS_BLOCK.getDefaultState();
+        BlockState soft = Blocks.STONE.getDefaultState();
+        BlockState air = Blocks.AIR.getDefaultState();
         BlockState barrier = Blocks.BEDROCK.getDefaultState();
+
+        var chunkStartX = chunk.getPos().getStartX();
+        var chunkStartZ = chunk.getPos().getStartZ();
 
         // Loop through local chunk coordinates (0..15)
         BlockPos.Mutable mutable = new BlockPos.Mutable();
         for (int localX = 0; localX < 16; localX++) {
             for (int localZ = 0; localZ < 16; localZ++) {
                 // Convert to world coords
-                var isWall = isIsWall(chunk, localX, localZ);
-                int intHeight = isWall ? 60 : 10;
+                int worldX = chunkStartX + localX;
+                int worldZ = chunkStartZ + localZ;
 
                 // Fill blocks up to height
-                for (int y = chunk.getBottomY(); y <= intHeight; y++) {
+                for (int y = chunk.getBottomY(); y <= HomePlotSystem.PLOT_SIZE; y++) {
                     mutable.set(localX, y, localZ);
-                    BlockState state =
-                              y == chunk.getBottomY() ? barrier
-                            : isWall ? barrier
-                            : y == intHeight ? top
-                            : solid;
+                    BlockState state;
 
-                    if (y == chunk.getBottomY()) {
+                    if (isWall(worldX, y, worldZ)) {
                         state = barrier;
-                    } else if (isWall) {
-                        state = barrier;
-                    } else if (y == intHeight) {
-                        state = top;
+                    } else if (isSoftWall(worldX, y, worldZ)) {
+                        state = soft;
                     } else {
-                        state = solid;
+                        state = air;
                     }
 
                     chunk.setBlockState(mutable, state);
@@ -90,44 +81,41 @@ public class HomeChunkGenerator extends ChunkGenerator {
         return CompletableFuture.completedFuture(chunk);
     }
 
-    private static boolean isIsWall(Chunk chunk, int localX, int localZ) {
-        int worldX = chunk.getPos().getStartX() + localX;
-        int worldZ = chunk.getPos().getStartZ() + localZ;
+    private static boolean isInThreshold(int i, int threshold) {
+        var modI = Math.abs(i % HomePlotSystem.PLOT_SIZE);
+        return modI < threshold || modI >= HomePlotSystem.PLOT_SIZE - threshold;
+    }
 
-        // Sine wave height
-        // double height = baseHeight + amplitude * Math.sin(worldX / frequency) * Math.cos(worldZ / frequency);
-        // int intHeight = (int) Math.floor(height);
+    private static boolean isInThreshold(int x, int y, int z, int threshold) {
+        return isInThreshold(x, threshold) || isInThreshold(y, threshold) || isInThreshold(z, threshold);
+    }
 
-        var modX = Math.abs(worldX % HomePlotSystem.PLOT_SIZE);
-        var modZ = Math.abs(worldZ % HomePlotSystem.PLOT_SIZE);
+    private static boolean isWall(int x, int y, int z) {
+        return isInThreshold(x, y, z, HomePlotSystem.BARRIER_THICKNESS);
+    }
 
-        return modX <= HomePlotSystem.BARRIER_THICKNESS
-        || modX >= HomePlotSystem.PLOT_SIZE - HomePlotSystem.BARRIER_THICKNESS
-        || modZ <= HomePlotSystem.BARRIER_THICKNESS
-        || modZ >= HomePlotSystem.PLOT_SIZE - HomePlotSystem.BARRIER_THICKNESS;
+    private static boolean isSoftWall(int x, int y, int z) {
+        return isInThreshold(x, y, z, (HomePlotSystem.PLOT_SIZE / 2) - 5);
     }
 
     @Override
     public int getWorldHeight() {
-        return 384;
+        return HomePlotSystem.MAX_HEIGHT;
     }
 
     @Override
     public int getSeaLevel() {
-        return 63;
+        return HomePlotSystem.MAX_HEIGHT / 2;
     }
 
     @Override
     public int getMinimumY() {
-        return -64;
+        return 0;
     }
 
     @Override
     public int getHeight(int x, int z, Heightmap.Type heightmap, HeightLimitView world, NoiseConfig noiseConfig) {
-        double amplitude = 20;
-        double frequency = 32;
-        int baseHeight = 64;
-        return (int) (baseHeight + amplitude * Math.sin(x / frequency) * Math.cos(z / frequency));
+        return HomePlotSystem.PLOT_SIZE;
     }
 
     @Override
@@ -148,6 +136,12 @@ public class HomeChunkGenerator extends ChunkGenerator {
 
     @Override
     public void appendDebugHudText(List<String> text, NoiseConfig noiseConfig, BlockPos pos) {
-        text.add("HomeChunkGenerator: sine wave terrain");
+        var gridPos = HomePlotSystem.worldToGridCoordinate(pos);
+        var index = HomePlotSystem.gridCoordinateToPlotIndex(gridPos.x, gridPos.y);
+
+        text.add("++==House====");
+        text.add("||  grid pos: " + gridPos.x + "_" + gridPos.y);
+        text.add("||  index: " + index);
+        text.add("++==House====");
     }
 }

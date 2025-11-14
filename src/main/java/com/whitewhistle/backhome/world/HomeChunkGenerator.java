@@ -98,7 +98,7 @@ public class HomeChunkGenerator extends ChunkGenerator {
     }
 
     private static boolean isSoftWall(int x, int y, int z) {
-        return isInThreshold(x, y, z, (HomePlotSystem.PLOT_SIZE / 2) - 5);
+        return isInThreshold(x, y, z, (HomePlotSystem.PLOT_SIZE / 2) - HomePlotSystem.AIR_POCKET_SIZE / 2);
     }
 
     @Override

@@ -1,7 +1,10 @@
 package com.whitewhistle.backhome.items.custom;
 
 import com.whitewhistle.backhome.client.render.TurtleShellArmorModel;
+import com.whitewhistle.backhome.items.ModItems;
+import com.whitewhistle.backhome.world.ModDimensions;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -58,4 +61,16 @@ public class TurtleShellArmorItem extends Item implements GeoItem {
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
     }
+
+    public static boolean canTakeItems(ItemStack stack, EquipmentSlot slot, PlayerEntity player) {
+        if (!stack.isOf(ModItems.TURTLE_ARMOR)) return true;
+        if (slot != EquipmentSlot.CHEST) return true;
+
+        var world = player.getEntityWorld();
+
+        // do not allow to take this item when in house dimension
+        return !world.getRegistryKey().equals(ModDimensions.HOUSE_WORLD_KEY);
+    }
+
+
 }

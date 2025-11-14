@@ -10,13 +10,18 @@ import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animatable.manager.AnimatableManager;
 import software.bernie.geckolib.animatable.processing.AnimationController;
 import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.constant.dataticket.DataTicket;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Consumer;
 
+import static com.whitewhistle.backhome.BackHome.MOD_ID;
+
 public class TurtleShellArmorItem extends Item implements GeoItem {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+    public static final DataTicket<Boolean> IS_IN_HOUSE = DataTicket.create(MOD_ID + "_is_in_house", Boolean.class);
 
     public TurtleShellArmorItem(Settings settings) {
         super(settings);

@@ -1,5 +1,6 @@
-package com.whitewhistle.backhome.items;
+package com.whitewhistle.backhome.items.custom;
 
+import com.whitewhistle.backhome.items.IHasModel;
 import net.minecraft.client.data.Model;
 import net.minecraft.client.data.Models;
 import net.minecraft.item.Item;

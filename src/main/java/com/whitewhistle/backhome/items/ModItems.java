@@ -1,10 +1,11 @@
 package com.whitewhistle.backhome.items;
 
+import com.whitewhistle.backhome.items.custom.TurtlePickaxeItem;
+import com.whitewhistle.backhome.items.custom.TurtleShellArmorItem;
 import com.whitewhistle.backhome.utils.ModIdentifier;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
-import net.minecraft.item.equipment.ArmorMaterials;
 import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
@@ -16,7 +17,7 @@ import java.util.function.Function;
 public class ModItems {
     public static final List<Item> entries = new ArrayList<>();
 
-    public static final Item TURTLE_ARMOR = register("turtle_armor", new Item.Settings().armor(ArmorMaterials.TURTLE_SCUTE, EquipmentType.CHESTPLATE));
+    public static final Item TURTLE_ARMOR = register("turtle_armor", TurtleShellArmorItem::new, new Item.Settings().armor(ModArmorMaterials.TURTLE_SHELL, EquipmentType.CHESTPLATE));
     public static final Item TURTLE_PICKAXE = register("turtle_pickaxe", TurtlePickaxeItem::new, new Item.Settings().pickaxe(ToolMaterial.WOOD, 1.0F, -2.8F));
 
     public static Item register(String path, Item.Settings settings) {

@@ -83,6 +83,9 @@ public class HomeChunkGenerator extends ChunkGenerator {
 
     private static boolean isInThreshold(int i, int threshold) {
         var modI = Math.abs(i % HomePlotSystem.PLOT_SIZE);
+        if (i < 0) {
+            modI--;
+        }
         return modI < threshold || modI >= HomePlotSystem.PLOT_SIZE - threshold;
     }
 

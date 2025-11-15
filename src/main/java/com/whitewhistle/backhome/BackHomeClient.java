@@ -2,6 +2,7 @@ package com.whitewhistle.backhome;
 
 import com.whitewhistle.backhome.client.ModKeyBindings;
 import com.whitewhistle.backhome.client.render.TurtleShellArmorModel;
+import com.whitewhistle.backhome.items.GlobalItemTooltipHandler;
 import com.whitewhistle.backhome.items.custom.TurtleShellArmorItem;
 import net.fabricmc.api.ClientModInitializer;
 import software.bernie.geckolib.event.armor.GeoArmorPreRenderEvent;
@@ -21,5 +22,7 @@ public class BackHomeClient implements ClientModInitializer {
 
             return false;
         });
+
+        GlobalItemTooltipHandler.init();
     }
 }

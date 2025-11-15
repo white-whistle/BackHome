@@ -1,5 +1,6 @@
 {
   "item.back-home.turtle_armor": "Turtle Armor",
   "item.back-home.turtle_pickaxe": "Turtle Pickaxe",
-  "item.back-home.pizza_slice": "Pizza Slice"
+  "item.back-home.pizza_slice": "Pizza Slice",
+  "tooltip.back-home.fishing_rod_pizza_bait": "Pizza armed and ready"
 }

@@ -2,6 +2,7 @@ package com.whitewhistle.backhome.world;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.whitewhistle.backhome.blocks.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.RegistryEntryLookup;
@@ -45,9 +46,9 @@ public class HomeChunkGenerator extends ChunkGenerator {
 
     @Override
     public CompletableFuture<Chunk> populateNoise(Blender blender, NoiseConfig noiseConfig, StructureAccessor structureAccessor, Chunk chunk) {
-        BlockState soft = Blocks.STONE.getDefaultState();
+        BlockState soft = ModBlocks.TURTLE_WALL.getDefaultState();
         BlockState air = Blocks.AIR.getDefaultState();
-        BlockState barrier = Blocks.BEDROCK.getDefaultState();
+        BlockState barrier = ModBlocks.DIMENSION_BARRIER.getDefaultState();
 
         var chunkStartX = chunk.getPos().getStartX();
         var chunkStartZ = chunk.getPos().getStartZ();

@@ -1,6 +1,7 @@
 package com.whitewhistle.backhome;
 
 import com.whitewhistle.backhome.command.ModCommands;
+import com.whitewhistle.backhome.blocks.ModBlocks;
 import com.whitewhistle.backhome.items.ModComponents;
 import com.whitewhistle.backhome.items.ModItemGroups;
 import com.whitewhistle.backhome.items.ModItems;
@@ -22,6 +23,7 @@ public class BackHome implements ModInitializer {
 		LOGGER.info("Hello Turtle world!");
 
         ModItems.init();
+        ModBlocks.init();
         ModItemGroups.init();
         ModDimensions.init();
         ModComponents.init();

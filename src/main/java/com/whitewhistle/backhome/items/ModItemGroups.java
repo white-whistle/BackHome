@@ -1,5 +1,6 @@
 package com.whitewhistle.backhome.items;
 
+import com.whitewhistle.backhome.blocks.ModBlocks;
 import com.whitewhistle.backhome.utils.ModIdentifier;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
@@ -18,6 +19,9 @@ public class ModItemGroups {
                     .icon(ModItems.TURTLE_ARMOR::getDefaultStack)
                     .entries((displayContext, entries) -> {
                         for (var item : ModItems.entries) {
+                            entries.add(item);
+                        }
+                        for (var item : ModBlocks.entries) {
                             entries.add(item);
                         }
                     })

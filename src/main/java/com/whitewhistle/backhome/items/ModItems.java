@@ -3,6 +3,7 @@ package com.whitewhistle.backhome.items;
 import com.whitewhistle.backhome.items.custom.TurtlePickaxeItem;
 import com.whitewhistle.backhome.items.custom.TurtleShellArmorItem;
 import com.whitewhistle.backhome.utils.ModIdentifier;
+import net.minecraft.component.type.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
@@ -18,7 +19,9 @@ public class ModItems {
     public static final List<Item> entries = new ArrayList<>();
 
     public static final Item TURTLE_ARMOR = register("turtle_armor", TurtleShellArmorItem::new, new Item.Settings().armor(ModArmorMaterials.TURTLE_SHELL, EquipmentType.CHESTPLATE));
-    public static final Item TURTLE_PICKAXE = register("turtle_pickaxe", TurtlePickaxeItem::new, new Item.Settings().pickaxe(ToolMaterial.WOOD, 1.0F, -2.8F));
+    public static final Item TURTLE_PICKAXE = register("turtle_pickaxe", TurtlePickaxeItem::new, new Item.Settings().pickaxe(ModToolMaterials.TURTLE, 1.0F, -2.8F));
+
+    public static final Item PIZZA_SLICE = register("pizza_slice", new Item.Settings().food(new FoodComponent.Builder().build()));
 
     public static Item register(String path, Item.Settings settings) {
         return register(path, Item::new, settings);

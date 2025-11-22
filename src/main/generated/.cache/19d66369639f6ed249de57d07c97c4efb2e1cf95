@@ -1,13 +1,11 @@
 // 1.21.10	-999999999-01-01T00:00:00	Back Home/Model Definitions
-808f3977bb9d8cd0669968e70e4dd0dbca3e14fe assets/back-home/blockstates/dimension_barrier.json
-68cad44eb136ca6815f919fa5ad722fe552ffc27 assets/back-home/blockstates/turtle_wall.json
-af6ed82150bbd0f48ff706c08cc40eb42d68d7f4 assets/back-home/items/dimension_barrier.json
-9b587ab44b314fbd40938c12b85ef73e7e33a3a7 assets/back-home/items/pizza_slice.json
+835120bde4d57ccbf7318728b9b5598b4510c427 assets/back-home/items/plastic_bag.json
+57723ed9b8ffcd881dd8d924f4f75b897d7a9126 assets/back-home/items/plastic_ingot.json
+2143f846a1d6d7f691d29e39a6f9ee9e51e279eb assets/back-home/items/plastic_pickaxe.json
+865e7fb3172e943ff47a2ac12ec55378911de3d9 assets/back-home/items/shellite_ingot.json
 e10a79863e14baa2e5a982e2801ec74c05d670f4 assets/back-home/items/turtle_armor.json
-1209038f0e5221a927ac4e4d977065be911ea658 assets/back-home/items/turtle_pickaxe.json
-0f574f6c4c840100780e1c674555d7c3bbf09eac assets/back-home/items/turtle_wall.json
-bb799b932766097bd76457acb489f33550712f07 assets/back-home/models/block/dimension_barrier.json
-a77363c9f595d0e23c7a4dec42561324e78b3ce2 assets/back-home/models/block/turtle_wall.json
-bc6c5a24785ba7b265a4b7cc99ee82ee0e3ada1d assets/back-home/models/item/pizza_slice.json
+76b23db1f0ba36fc8fca9e815cf7fe11a4e1a2b1 assets/back-home/models/item/plastic_bag.json
+720fb333dd5c3901839151521ab1e4d178de03e3 assets/back-home/models/item/plastic_ingot.json
+fc4984fd378e7c2b24157aa37b872d376284bdb9 assets/back-home/models/item/plastic_pickaxe.json
+904df566dbe9fd52980ddff6390ad4efef26eb9f assets/back-home/models/item/shellite_ingot.json
 d08b80daed09b9d43d5b574731b356eaba23cf53 assets/back-home/models/item/turtle_armor.json
-8ddf74d6c646c310c3f4f838575d917e021f1af1 assets/back-home/models/item/turtle_pickaxe.json

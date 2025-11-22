@@ -44,7 +44,7 @@ public class ModItems {
     public static void init() {
     }
 
-    public class Tags {
+    public static class Tags {
         public static TagKey<Item> REPAIRS_PLASTIC_ARMOR = of("repairs_plastic_armor");
 
         private static TagKey<Item> of(String id) {

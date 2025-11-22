@@ -2,9 +2,7 @@ package com.whitewhistle.backhome;
 
 import com.whitewhistle.backhome.command.ModCommands;
 import com.whitewhistle.backhome.blocks.ModBlocks;
-import com.whitewhistle.backhome.items.ModComponents;
-import com.whitewhistle.backhome.items.ModItemGroups;
-import com.whitewhistle.backhome.items.ModItems;
+import com.whitewhistle.backhome.items.*;
 import com.whitewhistle.backhome.network.ServerPacketReceiver;
 import com.whitewhistle.backhome.network.payload.ModPayloads;
 import com.whitewhistle.backhome.world.ModDimensions;
@@ -27,9 +25,12 @@ public class BackHome implements ModInitializer {
         ModItemGroups.init();
         ModDimensions.init();
         ModComponents.init();
+        ModLootTables.init();
 
         ModCommands.init();
         ModPayloads.init();
         ServerPacketReceiver.init();
+
+        FishingBaitSystem.init();
 	}
 }

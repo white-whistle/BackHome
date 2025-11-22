@@ -7,5 +7,6 @@
   "item.back-home.plastic_bag": "Plastic Bag",
   "block.back-home.turtle_wall": "Shell Block",
   "block.back-home.dimension_barrier": "Tough Shell Block",
-  "tooltip.back-home.fishing_rod_pizza_bait": "Pizza armed and ready"
+  "tooltip.back-home.fishing_bait1": "Attached Bait:",
+  "tooltip.back-home.fishing_bait2": "- %s"
 }

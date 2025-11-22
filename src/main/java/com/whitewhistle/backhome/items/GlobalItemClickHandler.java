@@ -11,14 +11,16 @@ import net.minecraft.util.ClickType;
 import java.util.Optional;
 
 public class GlobalItemClickHandler {
+
+
     public static Optional<Boolean> onClicked(ItemStack stack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference) {
         var cursorStack = cursorStackReference.get();
 
         if (clickType == ClickType.RIGHT) {
-            if (stack.isOf(Items.FISHING_ROD) && cursorStack.isOf(ModItems.PIZZA_SLICE)) {
+            if (stack.isOf(Items.FISHING_ROD) && FishingBaitSystem.isBait(cursorStack)) {
                 var baitStack = cursorStack.split(1);
 
-                // add pizza as bait
+                // add bait stack
                 stack.set(ModComponents.BAIT_TYPE, new BaitComponent(baitStack));
 
                 return Optional.of(true);

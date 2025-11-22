@@ -6,10 +6,11 @@ import com.whitewhistle.backhome.utils.ModIdentifier;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +19,11 @@ import java.util.function.Function;
 public class ModItems {
     public static final List<Item> entries = new ArrayList<>();
 
-    public static final Item TURTLE_ARMOR = register("turtle_armor", TurtleShellArmorItem::new, new Item.Settings().armor(ModArmorMaterials.TURTLE_SHELL, EquipmentType.CHESTPLATE));
-    public static final Item TURTLE_PICKAXE = register("turtle_pickaxe", TurtlePickaxeItem::new, new Item.Settings().pickaxe(ModToolMaterials.TURTLE, 1.0F, -2.8F));
+    public static final Item TURTLE_ARMOR = register("turtle_armor", TurtleShellArmorItem::new, new Item.Settings().armor(ModArmorMaterials.SHELLITE, EquipmentType.CHESTPLATE));
+    public static final Item PLASTIC_PICKAXE = register("plastic_pickaxe", TurtlePickaxeItem::new, new Item.Settings().pickaxe(ModToolMaterials.PLASTIC, 1.0F, -2.8F));
+    public static final Item PLASTIC_BAG = register("plastic_bag", Item::new, new Item.Settings());
+    public static final Item PLASTIC_INGOT = register("plastic_ingot", Item::new, new Item.Settings());
+    public static final Item SHELLITE_INGOT = register("shellite_ingot", Item::new, new Item.Settings());
 
     public static final Item PIZZA_SLICE = register("pizza_slice", new Item.Settings().food(new FoodComponent.Builder().build()));
 
@@ -38,5 +42,13 @@ public class ModItems {
     }
 
     public static void init() {
+    }
+
+    public class Tags {
+        public static TagKey<Item> REPAIRS_PLASTIC_ARMOR = of("repairs_plastic_armor");
+
+        private static TagKey<Item> of(String id) {
+            return TagKey.of(RegistryKeys.ITEM, ModIdentifier.of(id));
+        }
     }
 }

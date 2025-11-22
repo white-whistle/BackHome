@@ -21,7 +21,7 @@ public class TurtleWallBlock extends Block {
     protected float calcBlockBreakingDelta(BlockState state, PlayerEntity player, BlockView world, BlockPos pos) {
         var stack = player.getMainHandStack();
 
-        if (stack.isOf(ModItems.TURTLE_PICKAXE)) return super.calcBlockBreakingDelta(state, player, world, pos);
+        if (stack.isOf(ModItems.PLASTIC_PICKAXE)) return super.calcBlockBreakingDelta(state, player, world, pos);
 
         return 0;
     }

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "back-home:shellite_ingot",
+  "base": "minecraft:diamond_chestplate",
+  "result": {
+    "id": "back-home:turtle_armor"
+  },
+  "template": "back-home:turtle_deed"
+}

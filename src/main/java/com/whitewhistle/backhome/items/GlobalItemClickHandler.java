@@ -6,6 +6,7 @@ import net.minecraft.inventory.StackReference;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ClickType;
 
 import java.util.Optional;
@@ -22,6 +23,7 @@ public class GlobalItemClickHandler {
 
                 // add bait stack
                 stack.set(ModComponents.BAIT_TYPE, new BaitComponent(baitStack));
+                player.playSound(SoundEvents.ITEM_BUNDLE_INSERT);
 
                 return Optional.of(true);
             }
@@ -33,6 +35,7 @@ public class GlobalItemClickHandler {
                 // remove bait
                 cursorStackReference.set(baitData.stack());
                 stack.remove(ModComponents.BAIT_TYPE);
+                player.playSound(SoundEvents.ITEM_BUNDLE_REMOVE_ONE);
 
                 return Optional.of(true);
             }

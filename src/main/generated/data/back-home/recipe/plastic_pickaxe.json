@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "P": "back-home:plastic_ingot",
+    "|": "minecraft:stick"
+  },
+  "pattern": [
+    "PPP",
+    " | ",
+    " | "
+  ],
+  "result": {
+    "count": 1,
+    "id": "back-home:plastic_pickaxe"
+  }
+}

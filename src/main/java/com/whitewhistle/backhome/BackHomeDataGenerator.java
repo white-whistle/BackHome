@@ -1,6 +1,7 @@
 package com.whitewhistle.backhome;
 
 import com.whitewhistle.backhome.datagen.ModModelProvider;
+import com.whitewhistle.backhome.datagen.ModRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 
@@ -10,5 +11,6 @@ public class BackHomeDataGenerator implements DataGeneratorEntrypoint {
         var pack = fabricDataGenerator.createPack();
 
         pack.addProvider(ModModelProvider::new);
+        pack.addProvider(ModRecipeProvider::new);
 	}
 }

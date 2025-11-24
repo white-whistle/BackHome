@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_shellite_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "back-home:shellite_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "back-home:turtle_armor_smithing"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_shellite_ingot"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "back-home:turtle_armor_smithing"
+    ]
+  }
+}

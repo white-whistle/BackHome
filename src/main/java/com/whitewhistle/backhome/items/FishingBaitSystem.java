@@ -42,6 +42,11 @@ public class FishingBaitSystem {
             return ObjectArrayList.of(Items.TURTLE_SCUTE.getDefaultStack());
         });
 
+        register(ModItems.GOLDEN_PIZZA_SLICE, (stack, original) -> {
+            stack.remove(ModComponents.BAIT_TYPE);
+            return ObjectArrayList.of(ModItems.TURTLE_DEED.getDefaultStack());
+        });
+
         BaitHandler bundleBaitHandler = (stack, original) -> {
             var bait = stack.get(ModComponents.BAIT_TYPE);
             if (bait == null) return ObjectArrayList.of();

@@ -6,7 +6,8 @@
     "ArmorSlotMixin",
     "EquippableComponentMixin",
     "FishingBobberEntityMixin",
-    "ItemStackMixin"
+    "ItemStackMixin",
+    "MobEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

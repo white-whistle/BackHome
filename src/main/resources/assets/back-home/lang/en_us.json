@@ -17,5 +17,7 @@
   "tooltip.back-home.turtle_armor.no_plot1": "Click a Turtle Deed into this",
   "tooltip.back-home.turtle_armor.no_plot2": "to bind to a turtle plot",
   "tooltip.back-home.plot_index": "Linked to plot #%d",
-  "tooltip.back-home.named_plot": "Linked to %s"
+  "tooltip.back-home.named_plot": "Linked to %s",
+  "key.category.back-home.key-binds": "Back Home",
+  "key.back-home.enter_home": "Enter/Exit Turtle Plot"
 }

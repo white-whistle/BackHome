@@ -1,6 +1,26 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_diamond_chestplate": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:diamond_chestplate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_ender_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:ender_chest"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_shellite_ingot": {
       "conditions": {
         "items": [
@@ -21,7 +41,9 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_shellite_ingot"
+      "has_shellite_ingot",
+      "has_ender_chest",
+      "has_diamond_chestplate"
     ]
   ],
   "rewards": {

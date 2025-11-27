@@ -1,8 +1,13 @@
 package com.whitewhistle.backhome.world;
 
 import com.whitewhistle.backhome.items.ModComponents;
+import com.whitewhistle.backhome.items.ModItems;
+import com.whitewhistle.backhome.items.components.PlotComponent;
 import com.whitewhistle.backhome.items.components.TurtleShellComponent;
+import com.whitewhistle.backhome.items.custom.TurtleShellArmorItem;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -23,6 +28,23 @@ public class HomePlotSystem {
 
     private static final float HALF_PLOT_SIZE = PLOT_SIZE / 2f;
 
+    public static ItemStack createNextPlotDeed(MinecraftServer server) {
+        var serverState = ModPersistentState.getServerState(server);
+
+        var stack = createPlotDeed(serverState.lastPlotIndex);
+
+        serverState.lastPlotIndex++;
+
+        return stack;
+    }
+
+    public static ItemStack createPlotDeed(int index) {
+        var stack = ModItems.TURTLE_DEED.getDefaultStack();
+        stack.set(ModComponents.PLOT_TYPE, new PlotComponent(index));
+
+        return stack;
+    }
+
     public static void handleArmorTrigger(MinecraftServer server, ServerPlayerEntity player) {
         var turtleArmorStack = player.getEquippedStack(EquipmentSlot.CHEST);
         if (turtleArmorStack.isEmpty()) return;
@@ -39,42 +61,68 @@ public class HomePlotSystem {
 
         var isAtHome = world.getRegistryKey().equals(ModDimensions.HOUSE_WORLD_KEY);
 
-        ServerWorld targetWorld;
-        Vec3d targetPos;
-
-        boolean noShellData = shellData == null || shellData.worldKey() == null || shellData.worldPos() == null;
         if (isAtHome) {
+            boolean noShellData = shellData == null || shellData.worldKey() == null || shellData.worldPos() == null;
             if (noShellData) return;
 
-            targetWorld = server.getWorld(shellData.worldKey());
-            targetPos = shellData.worldPos();
+            movePlayerOutOfPlot(player, turtleArmorStack);
         } else {
-            if (noShellData) {
-                var serverState = ModPersistentState.getServerState(server);
+            shellData = new TurtleShellComponent(new Vec3d(player.getX(), player.getY(), player.getZ()), world.getRegistryKey());
+            turtleArmorStack.set(ModComponents.TURTLE_SHELL_TYPE, shellData);
 
-                shellData = new TurtleShellComponent(serverState.lastPlotIndex, new Vec3d(player.getX(), player.getY(), player.getZ()), world.getRegistryKey());
-                turtleArmorStack.set(ModComponents.TURTLE_SHELL_TYPE, shellData);
-
-                serverState.lastPlotIndex++;
-            } else {
-                shellData = new TurtleShellComponent(shellData.plotIndex(), new Vec3d(player.getX(), player.getY(), player.getZ()), world.getRegistryKey());
-                turtleArmorStack.set(ModComponents.TURTLE_SHELL_TYPE, shellData);
-            }
-
-            var plotPos = HomePlotSystem.plotIndexToGridCoordinate(shellData.plotIndex());
-
-            targetWorld = server.getWorld(ModDimensions.HOUSE_WORLD_KEY);
-            targetPos = HomePlotSystem.getPlotSpawnPoint(plotPos);
+            movePlayerToPlot(player, turtleArmorStack);
         }
-
-        player.teleport(targetWorld, targetPos.getX(),targetPos.getY(),targetPos.getZ(), Set.of() ,player.getYaw(),player.getPitch(),false);
     }
 
     public static Vector2i worldToGridCoordinate(BlockPos blockPos) {
         return new Vector2i(
-                Math.round((blockPos.getX() - HALF_PLOT_SIZE) / (float)PLOT_SIZE),
-                Math.round((blockPos.getZ() - HALF_PLOT_SIZE) / (float)PLOT_SIZE)
+                Math.round((blockPos.getX() - HALF_PLOT_SIZE) / (float) PLOT_SIZE),
+                Math.round((blockPos.getZ() - HALF_PLOT_SIZE) / (float) PLOT_SIZE)
         );
+    }
+
+    public static boolean isPlayerInHouseDim(PlayerEntity player) {
+        var world = player.getEntityWorld();
+        return world.getRegistryKey().equals(ModDimensions.HOUSE_WORLD_KEY);
+    }
+
+    public static int getArmorPlotIndex(ItemStack stack) {
+        var deedStack = TurtleShellArmorItem.getDeed(stack);
+        if (deedStack.isEmpty()) return 0;
+
+        var plotData = deedStack.get(ModComponents.PLOT_TYPE);
+        if (plotData == null) return 0;
+
+        return plotData.plot();
+    }
+
+    public static void movePlayerToPlot(PlayerEntity player, ItemStack armorStack) {
+        var idx = getArmorPlotIndex(armorStack);
+
+        var world = player.getEntityWorld();
+        if (!(world instanceof ServerWorld serverWorld)) return;
+
+        var server = serverWorld.getServer();
+
+        var plotPos = HomePlotSystem.plotIndexToGridCoordinate(idx);
+        var targetWorld = server.getWorld(ModDimensions.HOUSE_WORLD_KEY);
+        var targetPos = HomePlotSystem.getPlotSpawnPoint(plotPos);
+
+        player.teleport(targetWorld, targetPos.getX(), targetPos.getY(), targetPos.getZ(), Set.of(), player.getYaw(), player.getPitch(), false);
+    }
+
+    public static void movePlayerOutOfPlot(PlayerEntity player, ItemStack armorStack) {
+        var world = player.getEntityWorld();
+        if (!(world instanceof ServerWorld serverWorld)) return;
+
+        var shellData = armorStack.get(ModComponents.TURTLE_SHELL_TYPE);
+        if (shellData == null) return;
+
+        var server = serverWorld.getServer();
+        var targetWorld = server.getWorld(shellData.worldKey());
+        var targetPos = shellData.worldPos();
+
+        player.teleport(targetWorld, targetPos.getX(), targetPos.getY(), targetPos.getZ(), Set.of(), player.getYaw(), player.getPitch(), false);
     }
 
     public static Vector2i plotIndexToGridCoordinate(int index) {

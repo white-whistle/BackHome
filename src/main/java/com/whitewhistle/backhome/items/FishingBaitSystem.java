@@ -1,11 +1,13 @@
 package com.whitewhistle.backhome.items;
 
+import com.whitewhistle.backhome.world.HomePlotSystem;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.BundleContentsComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.world.ServerWorld;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -23,7 +25,7 @@ public class FishingBaitSystem {
         return entries.containsKey(stack.getItem());
     }
 
-    public static ObjectArrayList<ItemStack> generateLoot(ItemStack usedItem, Supplier<ObjectArrayList<ItemStack>> original) {
+    public static ObjectArrayList<ItemStack> generateLoot(ServerWorld world, ItemStack usedItem, Supplier<ObjectArrayList<ItemStack>> original) {
         var bait = usedItem.get(ModComponents.BAIT_TYPE);
         if (bait == null) return ObjectArrayList.of();
 
@@ -33,21 +35,21 @@ public class FishingBaitSystem {
         var handler = entries.get(item);
         if (handler == null) return ObjectArrayList.of();
 
-        return new ObjectArrayList<>(handler.generateLoot(usedItem, original));
+        return new ObjectArrayList<>(handler.generateLoot(world, usedItem, original));
     }
 
     public static void init() {
-        register(ModItems.PIZZA_SLICE, (stack, original) -> {
+        register(ModItems.PIZZA_SLICE, (world, stack, original) -> {
             stack.remove(ModComponents.BAIT_TYPE);
             return ObjectArrayList.of(Items.TURTLE_SCUTE.getDefaultStack());
         });
 
-        register(ModItems.GOLDEN_PIZZA_SLICE, (stack, original) -> {
+        register(ModItems.GOLDEN_PIZZA_SLICE, (world, stack, original) -> {
             stack.remove(ModComponents.BAIT_TYPE);
-            return ObjectArrayList.of(ModItems.TURTLE_DEED.getDefaultStack());
+            return ObjectArrayList.of(HomePlotSystem.createNextPlotDeed(world.getServer()));
         });
 
-        BaitHandler bundleBaitHandler = (stack, original) -> {
+        BaitHandler bundleBaitHandler = (world, stack, original) -> {
             var bait = stack.get(ModComponents.BAIT_TYPE);
             if (bait == null) return ObjectArrayList.of();
 
@@ -97,6 +99,6 @@ public class FishingBaitSystem {
 
     @FunctionalInterface
     interface BaitHandler {
-        Collection<ItemStack> generateLoot(ItemStack usedItem, Supplier<ObjectArrayList<ItemStack>> original);
+        Collection<ItemStack> generateLoot(ServerWorld world, ItemStack usedItem, Supplier<ObjectArrayList<ItemStack>> original);
     }
 }

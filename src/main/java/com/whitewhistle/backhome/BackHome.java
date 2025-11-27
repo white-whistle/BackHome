@@ -5,6 +5,7 @@ import com.whitewhistle.backhome.blocks.ModBlocks;
 import com.whitewhistle.backhome.items.*;
 import com.whitewhistle.backhome.network.ServerPacketReceiver;
 import com.whitewhistle.backhome.network.payload.ModPayloads;
+import com.whitewhistle.backhome.recipe.ModRecipeSerializer;
 import com.whitewhistle.backhome.world.ModDimensions;
 import net.fabricmc.api.ModInitializer;
 
@@ -30,6 +31,8 @@ public class BackHome implements ModInitializer {
         ModCommands.init();
         ModPayloads.init();
         ServerPacketReceiver.init();
+
+        ModRecipeSerializer.init();
 
         FishingBaitSystem.init();
 	}

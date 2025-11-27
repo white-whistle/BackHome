@@ -1,8 +1,10 @@
 package com.whitewhistle.backhome.datagen;
 
 import com.whitewhistle.backhome.items.ModItems;
+import com.whitewhistle.backhome.recipe.DeedCloningRecipe;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.minecraft.data.recipe.ComplexRecipeJsonBuilder;
 import net.minecraft.data.recipe.RecipeExporter;
 import net.minecraft.data.recipe.RecipeGenerator;
 import net.minecraft.data.recipe.SmithingTransformRecipeJsonBuilder;
@@ -69,14 +71,19 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
                 // === SMITHING ===
                 SmithingTransformRecipeJsonBuilder.create(
-                                Ingredient.ofItem(ModItems.TURTLE_DEED),
+                                Ingredient.ofItem(Items.ENDER_CHEST),
                                 Ingredient.ofItem(Items.DIAMOND_CHESTPLATE),
                                 Ingredient.ofItem(ModItems.SHELLITE_INGOT),
                                 RecipeCategory.COMBAT,
                                 ModItems.TURTLE_ARMOR
                         )
-                        .criterion("has_shellite_ingot", this.conditionsFromItem(ModItems.SHELLITE_INGOT))
+                        .criterion(hasItem(ModItems.SHELLITE_INGOT), this.conditionsFromItem(ModItems.SHELLITE_INGOT))
+                        .criterion(hasItem(Items.ENDER_CHEST), this.conditionsFromItem(Items.ENDER_CHEST))
+                        .criterion(hasItem(Items.DIAMOND_CHESTPLATE), this.conditionsFromItem(Items.DIAMOND_CHESTPLATE))
                         .offerTo(this.exporter, getItemPath(ModItems.TURTLE_ARMOR) + "_smithing");
+
+                // === DEED CLONING ===
+                ComplexRecipeJsonBuilder.create(DeedCloningRecipe::new).offerTo(this.exporter, "deed_cloning");
 
             }
         };

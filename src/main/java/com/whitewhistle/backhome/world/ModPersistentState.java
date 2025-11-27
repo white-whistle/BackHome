@@ -11,7 +11,7 @@ import static com.whitewhistle.backhome.BackHome.MOD_ID;
 
 public class ModPersistentState extends PersistentState {
 
-    public int lastPlotIndex = 0;
+    public int lastPlotIndex = 1;
 
     private ModPersistentState() {
     }

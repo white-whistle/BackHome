@@ -11,5 +11,11 @@
   "block.back-home.turtle_wall": "Shell Block",
   "block.back-home.dimension_barrier": "Tough Shell Block",
   "tooltip.back-home.fishing_bait1": "Attached Bait:",
-  "tooltip.back-home.fishing_bait2": "- %s"
+  "tooltip.back-home.fishing_bait2": "- %s",
+  "tooltip.back-home.turtle_armor.enter_plot": "Press [%s] to enter plot",
+  "tooltip.back-home.turtle_armor.exit_plot": "Press [%s] to exit plot",
+  "tooltip.back-home.turtle_armor.no_plot1": "Click a Turtle Deed into this",
+  "tooltip.back-home.turtle_armor.no_plot2": "to bind to a turtle plot",
+  "tooltip.back-home.plot_index": "Linked to plot #%d",
+  "tooltip.back-home.named_plot": "Linked to %s"
 }

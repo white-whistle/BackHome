@@ -10,6 +10,7 @@ import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.context.LootWorldContext;
+import net.minecraft.server.world.ServerWorld;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -23,7 +24,12 @@ public class FishingBobberEntityMixin {
         if (usedItem.contains(ModComponents.BAIT_TYPE)) {
             Supplier<ObjectArrayList<ItemStack>> boundOriginal = () -> original.call(instance, parameters);
 
-            return FishingBaitSystem.generateLoot(usedItem, boundOriginal);
+            var entity = (FishingBobberEntity)(Object)(this);
+            var world = entity.getEntityWorld();
+            if (world instanceof ServerWorld serverWorld) {
+                return FishingBaitSystem.generateLoot(serverWorld, usedItem, boundOriginal);
+            }
+
         }
 
         return original.call(instance, parameters);

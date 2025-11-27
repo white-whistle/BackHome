@@ -1,7 +1,9 @@
 package com.whitewhistle.backhome.items.custom;
 
 import com.whitewhistle.backhome.client.render.TurtleShellArmorModel;
+import com.whitewhistle.backhome.items.ModComponents;
 import com.whitewhistle.backhome.items.ModItems;
+import com.whitewhistle.backhome.items.components.ItemStackComponent;
 import com.whitewhistle.backhome.world.ModDimensions;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
@@ -72,5 +74,19 @@ public class TurtleShellArmorItem extends Item implements GeoItem {
         return !world.getRegistryKey().equals(ModDimensions.HOUSE_WORLD_KEY);
     }
 
+    public static ItemStack getDeed(ItemStack stack) {
+        var deedStorageData = stack.get(ModComponents.DEED_STORAGE_TYPE);
+        if (deedStorageData == null) return ItemStack.EMPTY;
+
+        return deedStorageData.stack();
+    }
+
+    public static void setDeed(ItemStack stack, ItemStack deedStack) {
+        if (deedStack == null || deedStack.isEmpty()) {
+            stack.remove(ModComponents.DEED_STORAGE_TYPE);
+        } else {
+            stack.set(ModComponents.DEED_STORAGE_TYPE, ItemStackComponent.of(deedStack));
+        }
+    }
 
 }

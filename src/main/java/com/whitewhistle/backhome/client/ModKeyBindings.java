@@ -15,11 +15,12 @@ import static com.whitewhistle.backhome.BackHome.MOD_ID;
 
 public class ModKeyBindings {
     public static final String KEY_CATEGORY = "key-binds";
+    public static KeyBinding ACTIVATE_TURTLE_ARMOR;
 
     public static void init() {
         var modCategory = KeyBinding.Category.create(ModIdentifier.of(KEY_CATEGORY));
 
-        var activateTurtleArmorKey = KeyBindingHelper.registerKeyBinding(
+        ACTIVATE_TURTLE_ARMOR = KeyBindingHelper.registerKeyBinding(
                 new KeyBinding(
                         "key." + MOD_ID + ".enter_home",
                         InputUtil.Type.KEYSYM,
@@ -29,7 +30,7 @@ public class ModKeyBindings {
         );
 
         ClientTickEvents.END_CLIENT_TICK.register((client) -> {
-            if (activateTurtleArmorKey.isPressed()) {
+            if (ACTIVATE_TURTLE_ARMOR.isPressed()) {
                 var player = client.player;
                 if (player == null) return;
 

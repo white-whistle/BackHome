@@ -1,6 +1,9 @@
 package com.whitewhistle.backhome.command;
 
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.whitewhistle.backhome.items.ModComponents;
+import com.whitewhistle.backhome.items.ModItems;
+import com.whitewhistle.backhome.items.components.PlotComponent;
 import com.whitewhistle.backhome.world.HomePlotSystem;
 import com.whitewhistle.backhome.world.ModDimensions;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -27,6 +30,24 @@ public class ModCommands {
                                 var plotSpawn = HomePlotSystem.getPlotSpawnPoint(plotPos);
 
                                 player.teleport(targetWorld, plotSpawn.getX(),plotSpawn.getY(),plotSpawn.getZ(), Set.of() ,0,0,false);
+
+                                return 1; // command success
+                            }))));
+
+            dispatcher.register(CommandManager.literal("giveTurtlePlotDeed")
+                    .then(CommandManager.argument("index", IntegerArgumentType.integer())
+                            .executes((ctx -> {
+                                int index = IntegerArgumentType.getInteger(ctx, "index");
+
+                                var source = ctx.getSource();
+                                var player = source.getPlayer();
+                                if (player == null) return -1;
+
+                                var deedStack = ModItems.TURTLE_DEED.getDefaultStack();
+
+                                deedStack.set(ModComponents.PLOT_TYPE, new PlotComponent(index));
+
+                                player.giveItemStack(deedStack);
 
                                 return 1; // command success
                             }))));

@@ -1,5 +1,5 @@
 # Back Home
-An ecentric pocket dimension mod
+A turtle themed pocket dimension mod
 
 <p>
   <img width="655" height="197" alt="image" src="https://github.com/user-attachments/assets/a132991c-f413-49c5-b0d7-bbb239be23a9" />
@@ -39,7 +39,7 @@ This will teleport us to plot #0, anyone on the server can access this plot - so
 <p><img src="https://github.com/white-whistle/BackHome/blob/main/raw/turtle_plot.png?raw=true" /></p>
 
 You ask the turtles about privacy, they say that if you have a deed for turtle land, only you would be able to enter that land.
-You manage to convice a turtle to give you his deed by giving him a golden pizza slice.
+You manage to convince a turtle to give you his deed by giving him a golden pizza slice.
 <p><img src="https://github.com/white-whistle/BackHome/blob/main/raw/golden_bait_tooltip.png?raw=true" /></p>
 <p><img src="https://github.com/white-whistle/BackHome/blob/main/raw/golden_pizza_fishing.gif?raw=true" /></p>
 

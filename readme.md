@@ -3,6 +3,7 @@ An ecentric pocket dimension mod
 
 ## Dependencies
 This mod requires geckolib
+<p><img src="https://camo.githubusercontent.com/7ca383c441116b7b61d8dc568c0c42c829ac05a605d05d1190be25029ed5000d/68747470733a2f2f692e696d6775722e636f6d2f4b42396b5259562e706e67" style="height: 64px" /></p>
 
 ## Motivation
 This mod aims to be an early~mid game pocket dimension, to provide an alternative experience to early game base building.
@@ -12,32 +13,33 @@ This mod aims to be an early~mid game pocket dimension, to provide an alternativ
 But turtles might be a little annoying to find... (maybe they are shy?)
 
 On your journey to finding turtles, you might spot enemies holding pizza slices - fortunately for you, turtles seem to like pizza.
+<p><img src="" /></p>
+
 By attaching a pizza slice to a fishing rod we can easily trade the slice for some turtle scute. just cast your fishing rod into the sea, sooner or later a turtle will bump your bobber to let you know you are now a proud owner of a new turtle scute.
-<p>tbd</p>
+<p><img src="https://github.com/white-whistle/BackHome/blob/main/raw/bait_tooltip.png?raw=true" /></p>
 
 With a little bit of this... and a little bit of that... you bash together a `Shellite Ingot`!
-<p>tbd</p>
+<p><img src="https://github.com/white-whistle/BackHome/blob/main/raw/shellite_recipe.png?raw=true" /></p>
 
 
 Strapping an ender chest on a diamond chestplate, and covering all of that with a `Shellite Ingot` yields a `Turtle Armor`!
-<p>crafting</p>
+<p><img src="https://github.com/white-whistle/BackHome/blob/main/raw/turtle_chestplate_smithing.png?raw=true" /></p>
 <p>on player</p>
 
 Once the armor is equipped, press the 'Enter/Exit Turtle Plot' key (by default bound to H, for home/house).
 <p>tbd</p>
 This will teleport us to plot #0, anyone on the server can access this plot - be cautious, it may become a torture chamber on some servers... on nicer servers, this can act as a hub world :D
-<p>tbd</p>
-
+<p><img src="https://github.com/white-whistle/BackHome/blob/main/raw/turtle_plot.png?raw=true" /></p>
 
 You ask the turtles about privacy, they say that if you have a deed for turtle land, only you would be able to enter that land.
 You manage to convice a turtle to give you his deed by giving him a golden pizza slice.
-<p>tbd</p>
+<p><img src="https://github.com/white-whistle/BackHome/blob/main/raw/golden_bait_tooltip.png?raw=true" /></p>
 
 You slot the deed into your turtle armor and enter it. you are now in your very own private plot!
 <p>tbd</p>
 
 You get a little lonely after a while in your own little world... so you take your deed out of the armor, print some copies of it, and hand them to your friends! (a smart player should always have a backup deed of important plots somewhere safe)
-<p>tbd</p>
+<p><img src="https://github.com/white-whistle/BackHome/blob/main/raw/deed_cloning_recipe.png?raw=true" /></p>
 
 At some point you may have multiple plots, and numbers are hard to remember..
 So you decide to rename your deed to something more meaningful
@@ -48,7 +50,8 @@ You realize that this turtle shell is a tough nut to crack.. none of your tools 
 
 You go fishing again to clear your mind, you seem to be down on your luck as you are mostly reeling in trash. as you fish a plastic bag a stroke of genius hits you.
 Plastic is turtle kryptonite! you rush to process the plastic and form it into a pickaxe
-<p>tbd</p>
+<p><img src="https://github.com/white-whistle/BackHome/blob/main/raw/plastic_ingot_furnace_recipe.png?raw=true" /></p>
+<p><img src="https://github.com/white-whistle/BackHome/blob/main/raw/plastic_pickaxe_recipe.png?raw=true" /></p>
 
 You were right! the plastic pickaxe broke the turtle shell wall! but as expected a plastic pickaxe doesnt last long at all and breaks after 10 blocks or so, but at least it works!
 

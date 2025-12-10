@@ -45,7 +45,7 @@ public class HomePlotSystem {
         return stack;
     }
 
-    public static void handleArmorTrigger(MinecraftServer server, ServerPlayerEntity player) {
+    public static void handleArmorTrigger(ServerPlayerEntity player) {
         var turtleArmorStack = player.getEquippedStack(EquipmentSlot.CHEST);
         if (turtleArmorStack.isEmpty()) return;
 

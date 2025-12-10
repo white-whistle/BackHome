@@ -2,6 +2,7 @@ package com.whitewhistle.backhome;
 
 import com.whitewhistle.backhome.command.ModCommands;
 import com.whitewhistle.backhome.blocks.ModBlocks;
+import com.whitewhistle.backhome.effect.ModStatusEffects;
 import com.whitewhistle.backhome.items.*;
 import com.whitewhistle.backhome.network.ServerPacketReceiver;
 import com.whitewhistle.backhome.network.payload.ModPayloads;
@@ -27,6 +28,8 @@ public class BackHome implements ModInitializer {
         ModDimensions.init();
         ModComponents.init();
         ModLootTables.init();
+
+        ModStatusEffects.registerEffects();
 
         ModCommands.init();
         ModPayloads.init();

@@ -9,6 +9,9 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.sound.SoundEvents;
 import org.lwjgl.glfw.GLFW;
 
 import static com.whitewhistle.backhome.BackHome.MOD_ID;
@@ -34,7 +37,18 @@ public class ModKeyBindings {
                 var player = client.player;
                 if (player == null) return;
 
-                if (!player.getEquippedStack(EquipmentSlot.CHEST).isOf(ModItems.TURTLE_ARMOR)) return;
+                var chestStack = player.getEquippedStack(EquipmentSlot.CHEST);
+                if (!chestStack.isOf(ModItems.TURTLE_ARMOR)) return;
+
+                var cooldownManager = player.getItemCooldownManager();
+                if (cooldownManager.isCoolingDown(chestStack)) return;
+
+                cooldownManager.set(chestStack, 20 * 3);
+
+                client.particleManager.addEmitter(player, ParticleTypes.PORTAL, 30);
+                player.playSound(SoundEvents.BLOCK_END_PORTAL_FRAME_FILL);
+
+                client.gameRenderer.showFloatingItem(new ItemStack(ModItems.TURTLE_ARMOR));
 
                 ClientPlayNetworking.send(new ActivateTurtleArmorPayload());
             }
